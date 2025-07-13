@@ -1,0 +1,52 @@
+{
+  "account": {
+    "initial_equity": 10000,
+    "demo_mode": true
+  },
+  "strategy": {
+    "sma_fast": 10,
+    "sma_slow": 25,
+    "rsi_period": 14,
+    "rsi_lower": 25,
+    "rsi_upper": 75,
+    "stop_loss_pct": 0.03,
+    "take_profit_pct": 0.06
+  },
+  "risk": {
+    "max_position_size": 0.05,
+    "max_risk_per_trade": 0.002,
+    "max_drawdown": 0.10,
+    "max_daily_loss": 0.02,
+    "max_positions": 3
+  },
+  "symbols": [
+    "AAPL",
+    "MSFT",
+    "GOOGL",
+    "AMZN",
+    "TSLA",
+    "NVDA",
+    "META",
+    "NFLX",
+    "AMD",
+    "INTC",
+    "ORCL",
+    "CRM",
+    "ADBE",
+    "PYPL",
+    "UBER",
+    "SPOT",
+    "ZM",
+    "DOCU",
+    "SQ",
+    "SHOP"
+  ],
+  "trading": {
+    "check_interval": 60,
+    "market_hours": {
+      "start": "09:30",
+      "end": "16:00"
+    },
+    "test_mode": true
+  }
+}
