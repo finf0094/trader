@@ -171,13 +171,26 @@ class TradingTelegramBot:
                         keyboard = self._get_main_keyboard()
 
                         if message_id:
-                            await self.bot.edit_message_text(
-                                text=text,
-                                chat_id=chat_id,
-                                message_id=message_id,
-                                parse_mode="HTML",
-                                reply_markup=keyboard
-                            )
+                            try:
+                                await self.bot.edit_message_text(
+                                    text=text,
+                                    chat_id=chat_id,
+                                    message_id=message_id,
+                                    parse_mode="HTML",
+                                    reply_markup=keyboard
+                                )
+                            except Exception as edit_error:
+                                # Если не удалось отредактировать, отправляем новое сообщение
+                                if "message is not modified" in str(edit_error):
+                                    logger.debug("Сообщение не изменилось, пропускаем обновление")
+                                else:
+                                    logger.error(f"Ошибка редактирования сообщения: {edit_error}")
+                                    await self.bot.send_message(
+                                        chat_id=chat_id,
+                                        text=text,
+                                        parse_mode="HTML",
+                                        reply_markup=keyboard
+                                    )
                         else:
                             await self.bot.send_message(
                                 chat_id=chat_id,
@@ -221,13 +234,25 @@ class TradingTelegramBot:
                         keyboard = self._get_main_keyboard()
 
                         if message_id:
-                            await self.bot.edit_message_text(
-                                text=text,
-                                chat_id=chat_id,
-                                message_id=message_id,
-                                parse_mode="HTML",
-                                reply_markup=keyboard
-                            )
+                            try:
+                                await self.bot.edit_message_text(
+                                    text=text,
+                                    chat_id=chat_id,
+                                    message_id=message_id,
+                                    parse_mode="HTML",
+                                    reply_markup=keyboard
+                                )
+                            except Exception as edit_error:
+                                if "message is not modified" in str(edit_error):
+                                    logger.debug("Сообщение позиций не изменилось")
+                                else:
+                                    logger.error(f"Ошибка редактирования позиций: {edit_error}")
+                                    await self.bot.send_message(
+                                        chat_id=chat_id,
+                                        text=text,
+                                        parse_mode="HTML",
+                                        reply_markup=keyboard
+                                    )
                         else:
                             await self.bot.send_message(
                                 chat_id=chat_id,
